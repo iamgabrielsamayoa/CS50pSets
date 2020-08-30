@@ -1,0 +1,67 @@
+#include <cs50.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <ctype.h>
+
+
+int main(int argc, string argv[])
+{
+//Declare unsigned to avoid taking negative values
+    unsigned int key = 0;
+  
+//Takes command lines arguments
+    // string a = argv[1];  
+    if (argc != 2)
+    {
+        printf("usage: /caesar key\n");
+        return 1;
+    }
+    for (int i = 0, len = strlen(argv[1]); i < len; i++)
+    {
+        int n = argv[1][i];
+    
+        if (n == 0 || !isdigit(n))
+        {
+            printf("usage: /caesar key\n");
+            return 1;
+        }
+    }
+
+    if (argc == 2 && isdigit(*argv[1]))
+    {
+//--------------------
+//convert key to int
+        key = atoi(argv[1]);
+//we get the plaintext
+        string plaintext = get_string("Plaintext: ");
+//we print ciphertext word
+        printf("ciphertext: ");
+//we iterate to find and convert all plaintext values
+        for (int i = 0, len = strlen(plaintext); i < len; i++)
+        {
+            char c = plaintext[i];
+            if (isalpha(c))
+            {
+                char b = 'A';
+                if (islower(c))
+                {
+                    b = 'a';
+                }
+                printf("%c", (c - b + key) % 26 + b);
+            }
+            else
+            {
+                printf("%c", c);
+            }
+        }
+
+        printf("\n");
+        return 0;
+    }
+    else 
+    {
+        printf("usage: /caesar key\n");
+        return 1;
+    }
+}
